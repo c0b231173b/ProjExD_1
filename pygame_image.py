@@ -20,17 +20,20 @@ def main():
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
+        move_x,move_y = 0,0
         key_lst = pg.key.get_pressed()#8-3キーの押下状態
         if key_lst[pg.K_UP]:#上キーがTrueならこうかとんの縦座標を-1する
-            kk_rct.move_ip((0, -1))
+            move_y -= 1
         if key_lst[pg.K_DOWN]:
-            kk_rct.move_ip((0, +1))
+            move_y += 1
         if key_lst[pg.K_LEFT]:
-            kk_rct.move_ip((-1, 0))
+            move_x -= 1
         if key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip((+1, 0))
+            move_x += 2
         else:
-            kk_rct.move_ip((-1, 0))
+            move_x -= 1
+
+        kk_rct.move_ip((move_x,move_y))
 
         x = -(tmr%3200)
         screen.blit(bg_img, [x, 0])
